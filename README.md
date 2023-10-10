@@ -1,5 +1,8 @@
 # React + TypeScript + Vite
 
+## QUICK SETUP
+add .env file to root of repo next to the .env.test file and add VITE_API_KEY
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
