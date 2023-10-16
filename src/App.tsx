@@ -4,6 +4,8 @@ import axios from "axios";
 
 function App() {
   const [Items, ItemSetter] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const url =
@@ -26,8 +28,36 @@ function App() {
     };
     get();
   }, []);
+
+  const itemsPerPage = 10;
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const previousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  console.log("currentPage:", currentPage);
+  console.log("totalPages:", totalPages);
+  console.log("Items:", Items);
+
   return (
     <>
+      <div>
+        <button onClick={previousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>Page {currentPage}</span>
+        <button onClick={nextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
+      </div>
+
       {Items.map((itm: any) => (
         <div>
           Id : {itm.Id.S}
