@@ -5,6 +5,16 @@ import axios from "axios";
 function App() {
   const [Items, ItemSetter] = useState([]);
 
+  const [Currentpage, setcurrentpage] = useState(1);
+
+  const nextclick = () => {
+    setcurrentpage(Currentpage + 1);
+  };
+
+  const prevclick = () => {
+    setcurrentpage(Currentpage - 1);
+  };
+
   useEffect(() => {
     const url =
       "https://corsproxy.io/?" +
@@ -27,6 +37,15 @@ function App() {
   }, []);
   return (
     <>
+      <button className="prev" onClick={prevclick}>
+        {" "}
+        Previous
+      </button>
+      <button className="next" onClick={nextclick}>
+        {" "}
+        Next{" "}
+      </button>
+
       {Items.map((i: any) => (
         <div>
           <div>Id : {i.Id.S}</div>
@@ -35,6 +54,7 @@ function App() {
           <div className="Item1"> current2 : {i.current2.N}</div>
         </div>
       ))}
+      <div> Page Number: {Currentpage}</div>
     </>
   );
 }
