@@ -3,7 +3,8 @@ import "./App.css";
 import axios from "axios";
 
 function App() {
-  const [items, itemsSetter] = useState([]); //setting state for items
+  const [items, itemsSetter] = useState([]); 
+  const [count, countSetter] = useState(0)//setting state for items
 
   useEffect(() => {
     const url =
@@ -12,7 +13,14 @@ function App() {
         "https://eg05cvpjn2.execute-api.eu-west-2.amazonaws.com/stage/queryResults?teamId=test_tbb_char_1.3"
       );
 
-    // I am saving this spot for the buttons function 
+    // I am saving this spot for the buttons functions
+    const increment = () => {
+      countSetter(count+1)
+    };
+
+    const decrement = () => {
+      countSetter(count - 1)
+    };
 
 
     const get = async () => {
@@ -24,7 +32,7 @@ function App() {
         // params: { teamId: "test_tbb_char_1.3" },
       });
       console.log(res.data.queryResult.Items);
-      itemsSetter(res.data.queryResult.Items)
+      itemsSetter(res.data.queryResult.Items);
     };
     get();
   }, []);
@@ -32,8 +40,8 @@ function App() {
 
   return (
     <>
-      <button className="button leftButton"> Left Button </button>
-      <button className="button rightButton"> Right Button</button>
+      <button className="button leftButton" onClick={decrement()}> Previous </button>
+      <button className="button rightButton"> Next </button>
       {items.map(
         (obj: any) => {
           return (
