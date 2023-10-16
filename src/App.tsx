@@ -13,15 +13,6 @@ function App() {
         "https://eg05cvpjn2.execute-api.eu-west-2.amazonaws.com/stage/queryResults?teamId=test_tbb_char_1.3"
       );
 
-    // I am saving this spot for the buttons functions
-    const increment = () => {
-      countSetter(count+1)
-    };
-
-    const decrement = () => {
-      countSetter(count - 1)
-    };
-
 
     const get = async () => {
       const res = await axios.get(url, {
@@ -37,11 +28,22 @@ function App() {
     get();
   }, []);
 
+  // I am saving this spot for the buttons functions
+  const incrementCount = () => {
+    countSetter(count + 1)
+    console.log(count)
+  };
+
+  const decrementCount = () => {
+    countSetter(count - 1)
+    console.log(count)
+  };
+
 
   return (
     <>
-      <button className="button leftButton" onClick={decrement()}> Previous </button>
-      <button className="button rightButton"> Next </button>
+      <button className="button leftButton" onClick={decrementCount}> Previous </button>
+      <button className="button rightButton" onClick={incrementCount}> Next </button>
       {items.map(
         (obj: any) => {
           return (
